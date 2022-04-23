@@ -10,9 +10,6 @@ public class AppController extends Application {
     private RequestQueue requestQueue;
 
     public static synchronized AppController getInstance() {
-        if (instance == null) {
-            instance = new AppController();
-        }
         return instance;
     }
 
@@ -25,5 +22,11 @@ public class AppController extends Application {
 
     public <T> void addRequest(Request<T> request) {
         getRequestQueue().add(request);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
     }
 }

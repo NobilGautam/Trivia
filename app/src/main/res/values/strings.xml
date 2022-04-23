@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Trivia</string>
-    <string name="questionNoPlaceholder">Question: 41/100</string>
-    <string name="sampleQuestion">This is where the question is going to be</string>
+    <string name="questionNoPlaceholder">Question: 1/10</string>
+    <string name="sampleQuestion">Loading question...</string>
 </resources>

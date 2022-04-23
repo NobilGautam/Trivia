@@ -16,7 +16,7 @@ public class Question {
         return question;
     }
 
-    public boolean isAnswer() {
+    public boolean getAnswer() {
         return answer;
     }
 }

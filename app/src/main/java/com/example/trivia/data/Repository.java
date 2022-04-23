@@ -29,6 +29,7 @@ public class Repository {
                                     jsonObject.getBoolean("correct_answer"));
                             questions.add(question);
                         }
+                        Log.d("mainopl", questions.toString());
                         callback.processFinished(questions);
                     } catch (JSONException e) {
                         e.printStackTrace();
