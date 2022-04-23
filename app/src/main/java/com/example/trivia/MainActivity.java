@@ -3,26 +3,21 @@ package com.example.trivia;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
-import com.android.volley.*;
-import com.android.volley.toolbox.*;
-import com.example.trivia.controller.AppController;
+import com.example.trivia.data.QuestionListAsyncResponse;
+import com.example.trivia.data.Repository;
+import com.example.trivia.model.Question;
 
-import org.json.JSONObject;
-
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private String url = "https://opentdb.com/api.php?amount=10";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
+        Repository repository = (Repository) new Repository().getQuestions(questions ->
+                Log.d("DATA", questions.toString()));
 
-                }, error -> {
-
-                });
-        AppController.getInstance().addRequest(jsonObjectRequest);
     }
 }
