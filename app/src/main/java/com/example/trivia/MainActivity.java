@@ -19,6 +19,7 @@ import com.example.trivia.data.QuestionListAsyncResponse;
 import com.example.trivia.data.Repository;
 import com.example.trivia.databinding.ActivityMainBinding;
 import com.example.trivia.model.Question;
+import com.example.trivia.util.Prefs;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String CURRENT_SCORE = "CurrentScore";
     private ActivityMainBinding binding;
     List<Question> questionBank;
+    Prefs prefs = new Prefs(MainActivity.this);
     private int currentQuestionIndex = 0;
     int currentScore = 0;
     int highScore;
@@ -47,11 +49,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.currentScoreTextView.setText("Current Score: " + currentScore);
-        SharedPreferences sharedPreferences = getSharedPreferences(CURRENT_SCORE, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        SharedPreferences getSharedData = getSharedPreferences(CURRENT_SCORE, MODE_PRIVATE);
-        highScore = getSharedData.getInt("current", 0);
+        highScore = prefs.getHighestScore();
         binding.highScoreTextView.setText("High Score: " + String.valueOf(highScore));
 
         //Checking answer
@@ -62,11 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "That's correct!", Toast.LENGTH_SHORT).show();
                     currentScore++;
                     fadeAnimation();
-                    if (currentScore > highScore) {
-                        highScore = currentScore;
-                        editor.putInt("current", highScore);
-                        editor.apply();
-                    }
+                    prefs.saveHighestScore(currentScore);
                 } else {
                     Toast.makeText(MainActivity.this, "That's wrong!", Toast.LENGTH_SHORT).show();
                     shakeAnimation();
@@ -85,11 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "That's correct!", Toast.LENGTH_SHORT).show();
                     currentScore++;
                     fadeAnimation();
-                    if (currentScore > highScore) {
-                        highScore = currentScore;
-                        editor.putInt("current", highScore);
-                        editor.apply();
-                    }
+                    prefs.saveHighestScore(currentScore);
                 } else {
                     Toast.makeText(MainActivity.this, "That's wrong!", Toast.LENGTH_SHORT).show();
                     shakeAnimation();
