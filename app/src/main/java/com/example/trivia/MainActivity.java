@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String CURRENT_SCORE = "CurrentScore";
     private ActivityMainBinding binding;
     List<Question> questionBank;
-    Prefs prefs = new Prefs(MainActivity.this);
     private int currentQuestionIndex = 0;
     int currentScore = 0;
     int highScore;
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Prefs prefs = new Prefs(MainActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         questionBank = new Repository().getQuestions(new QuestionListAsyncResponse() {
             @Override
